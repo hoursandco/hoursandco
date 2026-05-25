@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hours & Co. — Revenue Studio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --white: #ffffff;
+      --gray-light: #f0f0f0;
+      --gray-mid: #e2e2e2;
+      --gray-dark: #555555;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--black);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: var(--white);
+      letter-spacing: 3px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #999;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    /* HERO */
+    .hero {
+      background: var(--gray-light);
+      padding: 96px 40px 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 14vw, 150px);
+      line-height: 0.9;
+      letter-spacing: 6px;
+      color: var(--black);
+      margin-bottom: 28px;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--gray-dark);
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 36px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid var(--black);
+      transition: all 0.2s;
+    }
+
+    .btn-solid { background: var(--black); color: var(--white); }
+    .btn-solid:hover { background: #333; border-color: #333; }
+    .btn-outline { background: transparent; color: var(--black); }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    /* SECTION LABELS */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      letter-spacing: 2px;
+      line-height: 1;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--gray-dark);
+      max-width: 540px;
+    }
+
+    /* APPS */
+    #apps {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .apps-header { margin-bottom: 56px; }
+
+    .app-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 2px solid var(--black);
+      margin-bottom: 40px;
+    }
+
+    .app-info {
+      padding: 48px;
+      border-right: 2px solid var(--black);
+    }
+
+    .app-tag {
+      display: inline-block;
+      background: var(--black);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 20px;
+    }
+
+    .app-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .app-url {
+      font-size: 13px;
+      color: var(--gray-dark);
+      text-decoration: none;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .app-url:hover { color: var(--black); text-decoration: underline; }
+
+    .app-desc {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.75;
+    }
+
+    .app-pricing { padding: 48px; }
+
+    .pricing-header {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+      margin-bottom: 24px;
+    }
+
+    .pricing-cards { display: flex; flex-direction: column; gap: 14px; }
+
+    .pricing-card {
+      border: 1.5px solid var(--gray-mid);
+      padding: 18px 22px;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .pricing-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .pricing-tier {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .pricing-card.featured .pricing-tier { color: #888; }
+
+    .pricing-plan {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+    }
+
+    .pricing-amount { text-align: right; }
+
+    .pricing-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .pricing-cadence {
+      font-size: 11px;
+      color: var(--gray-dark);
+    }
+
+    .pricing-card.featured .pricing-cadence { color: #888; }
+
+    .pricing-features {
+      list-style: none;
+      font-size: 13px;
+      color: #444;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pricing-card.featured .pricing-features { color: #bbb; }
+
+    .pricing-features li::before {
+      content: "▪ ";
+      color: var(--black);
+    }
+
+    .pricing-card.featured .pricing-features li::before { color: #fff; }
+
+    /* POLICIES */
+    #policies {
+      background: var(--gray-light);
+      padding: 80px 40px;
+    }
+
+    .policies-inner { max-width: 1200px; margin: 0 auto; }
+    .policies-header { margin-bottom: 48px; }
+
+    .policies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .policy-card {
+      background: var(--white);
+      border: 2px solid var(--black);
+      padding: 32px;
+    }
+
+    .policy-icon { font-size: 26px; margin-bottom: 14px; }
+
+    .policy-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .policy-body {
+      font-size: 13.5px;
+      color: #444;
+      line-height: 1.75;
+    }
+
+    .policy-body strong { color: var(--black); }
+    .policy-body a { color: var(--black); }
+
+    /* CONTACT */
+    #contact {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 48px;
+    }
+
+    .contact-info h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .contact-info p {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 28px;
+    }
+
+    .contact-rows { display: flex; flex-direction: column; gap: 14px; }
+
+    .contact-row { display: flex; align-items: center; gap: 16px; font-size: 14px; }
+
+    .contact-row-label {
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      width: 56px;
+      flex-shrink: 0;
+      color: var(--gray-dark);
+    }
+
+    .contact-row a {
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-row a:hover { text-decoration: underline; }
+
+    .contact-apps h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .app-link-row { display: flex; flex-direction: column; gap: 12px; }
+
+    .app-link-item {
+      border: 1.5px solid var(--gray-mid);
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      color: var(--black);
+      transition: all 0.2s;
+    }
+
+    .app-link-item:hover { border-color: var(--black); background: var(--gray-light); }
+
+    .app-link-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1px;
+    }
+
+    .app-link-sub { font-size: 12px; color: var(--gray-dark); margin-top: 2px; }
+
+    .app-link-url { font-size: 12px; color: var(--gray-dark); letter-spacing: 0.5px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      color: #aaa;
+      padding: 48px 40px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 34px;
+      color: var(--white);
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+    }
+
+    .footer-tagline { font-size: 13px; color: #666; }
+
+    .footer-links { display: flex; flex-direction: column; gap: 10px; text-align: right; }
+
+    .footer-links a {
+      font-size: 13px;
+      color: #666;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 28px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid #222;
+      font-size: 12px;
+      color: #444;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 20px; }
+      .hero { padding: 72px 24px 60px; }
+      #apps { padding: 60px 24px; }
+      .app-block { grid-template-columns: 1fr; }
+      .app-info { border-right: none; border-bottom: 2px solid var(--black); padding: 32px 24px; }
+      .app-pricing { padding: 32px 24px; }
+      #policies { padding: 60px 24px; }
+      #contact { padding: 60px 24px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      footer { padding: 40px 24px 28px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-links { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#top" class="nav-logo">HOURS &amp; CO.</a>
+    <ul class="nav-links">
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#policies">Policies</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <p class="hero-eyebrow">Revenue Studio</p>
+    <h1>HOURS<br>&amp; CO.</h1>
+    <p>We build focused software products that solve real problems — and charge fairly for the value they deliver.</p>
+    <div class="hero-cta">
+      <a href="#apps" class="btn btn-solid">Our Apps</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- APPS -->
+  <section id="apps">
+    <div class="apps-header">
+      <p class="section-label">Our Products</p>
+      <h2 class="section-title">TWO APPS.<br>TWO PROBLEMS SOLVED.</h2>
+      <p class="section-sub">Hours &amp; Co. owns and operates two subscription software products available today.</p>
+    </div>
+
+    <!-- DealDossier -->
+    <div class="app-block">
+      <div class="app-info">
+        <span class="app-tag">App 01</span>
+        <div class="app-name">DealDossier</div>
+        <a href="https://dealdossier.io" target="_blank" class="app-url">dealdossier.io ↗</a>
+        <p class="app-desc">
+          DealDossier is a personalized retail-deals service. We monitor over 1,700 retailer promotional emails on our subscribers' behalf and send each person only the deals matching their watchlist of categories and brands — cutting through the noise so you never miss a sale that actually matters to you.<br><br>
+          The free tier delivers curated deal digests. Upgrading to <strong>Personal Shopper</strong> unlocks unlimited watchlist picks, per-pick price-range and minimum-discount filters, ad-free emails, and priority alerts for flash deals.
+        </p>
+      </div>
+      <div class="app-pricing">
+        <p class="pricing-header">Pricing</p>
+        <div class="pricing-cards">
+          <div class="pricing-card">
+            <div class="pricing-card-top">
+              <div>
+                <span class="pricing-tier">Free Tier</span>
+                <div class="pricing-plan">Deal Digest</div>
+              </div>
+              <div class="pricing-amount">
+                <div class="pricing-price">$0</div>
+                <div class="pricing-cadence">forever free</div>
+              </div>
+            </div>
+            <ul class="pricing-features">
+              <li>Curated deal emails</li>
+              <li>Up to 3 watchlist picks</li>
+              <li>Daily digest format</li>
+            </ul>
+          </div>
+          <div class="pricing-card featured">
+            <div class="pricing-card-top">
+              <div>
+                <span class="pricing-tier">Paid Tier</span>
+                <div class="pricing-plan">Personal Shopper</div>
+              </div>
+              <div class="pricing-amount">
+                <div class="pricing-price">$4.99</div>
+                <div class="pricing-cadence">/ month · cancel anytime</div>
+              </div>
+            </div>
+            <ul class="pricing-features">
+              <li>Unlimited watchlist picks</li>
+              <li>Per-pick price-range filters ($–$$$$)</li>
+              <li>Minimum-discount filters</li>
+              <li>Ad-free emails — just the deals</li>
+              <li>Priority alerts for 24-hr flash deals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WatchUm -->
+    <div class="app-block">
+      <div class="app-info">
+        <span class="app-tag">App 02</span>
+        <div class="app-name">WatchUm</div>
+        <a href="https://watchum.io" target="_blank" class="app-url">watchum.io ↗</a>
+        <p class="app-desc">
+          WatchUm is a subscription web app that delivers digital access to crime-incident reports for residential apartments and streets in <strong>Austin, Texas</strong>, aggregated from local police-department public records.<br><br>
+          Whether you're touring apartments on a weekend, monitoring your home address, or advising clients as a tenant-rep agent — WatchUm gives you filtered, contextual incident data so you can make informed decisions about where to live and work.
+        </p>
+      </div>
+      <div class="app-pricing">
+        <p class="pricing-header">Pricing</p>
+        <div class="pricing-cards">
+          <div class="pricing-card">
+            <div class="pricing-card-top">
+              <div>
+                <span class="pricing-tier">Tier 01 · One-Time</span>
+                <div class="pricing-plan">House Hunter</div>
+              </div>
+              <div class="pricing-amount">
+                <div class="pricing-price">$9.99</div>
+                <div class="pricing-cadence">one-time</div>
+              </div>
+            </div>
+            <ul class="pricing-features">
+              <li>15 reports, up to 2 months access</li>
+              <li>Filter by block</li>
+              <li>Crime descriptions &amp; context</li>
+            </ul>
+          </div>
+          <div class="pricing-card">
+            <div class="pricing-card-top">
+              <div>
+                <span class="pricing-tier">Tier 02 · Recurring</span>
+                <div class="pricing-plan">Resident</div>
+              </div>
+              <div class="pricing-amount">
+                <div class="pricing-price">$1.99</div>
+                <div class="pricing-cadence">/ mo, billed quarterly</div>
+              </div>
+            </div>
+            <ul class="pricing-features">
+              <li>Ongoing reports for your residence</li>
+              <li>Email alerts for your address</li>
+              <li>Filter by block</li>
+              <li>Crime descriptions &amp; context</li>
+              <li>Dates &amp; details at that residence</li>
+            </ul>
+          </div>
+          <div class="pricing-card">
+            <div class="pricing-card-top">
+              <div>
+                <span class="pricing-tier">Tier 03 · Recurring</span>
+                <div class="pricing-plan">Professional</div>
+              </div>
+              <div class="pricing-amount">
+                <div class="pricing-price">$39.99</div>
+                <div class="pricing-cadence">/ month</div>
+              </div>
+            </div>
+            <ul class="pricing-features">
+              <li>Unlimited reports &amp; locations</li>
+              <li>Filter by block</li>
+              <li>Crime descriptions &amp; context</li>
+              <li>Dates &amp; details</li>
+              <li>Unlimited email alerts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLICIES -->
+  <section id="policies">
+    <div class="policies-inner">
+      <div class="policies-header">
+        <p class="section-label">Legal &amp; Policies</p>
+        <h2 class="section-title">TERMS &amp;<br>POLICIES</h2>
+        <p class="section-sub">The following policies apply to all products owned and operated by Hours &amp; Co., including DealDossier and WatchUm.</p>
+      </div>
+      <div class="policies-grid">
+
+        <div class="policy-card">
+          <div class="policy-icon">↩</div>
+          <div class="policy-title">Refund Policy</div>
+          <div class="policy-body">
+            <strong>7-day money-back guarantee.</strong> If you are not satisfied with your purchase, you may request a full refund within <strong>7 days</strong> of your original purchase date — no questions asked.<br><br>
+            Requests submitted after 7 days are not eligible. To request a refund, email <a href="mailto:support@hoursand.co">support@hoursand.co</a> with your account email and purchase details. Refunds are applied to the original payment method within 5–10 business days.
+          </div>
+        </div>
+
+        <div class="policy-card">
+          <div class="policy-icon">✕</div>
+          <div class="policy-title">Cancellation Policy</div>
+          <div class="policy-body">
+            <strong>Cancel anytime.</strong> All recurring subscriptions — DealDossier Personal Shopper, WatchUm Resident, and WatchUm Professional — can be cancelled at any time from your account settings with one click.<br><br>
+            Access remains active through the end of your current billing period. You will not be charged again. For WatchUm House Hunter (one-time), no recurring charge exists — your 2-month access runs from the purchase date.
+          </div>
+        </div>
+
+        <div class="policy-card">
+          <div class="policy-icon">⚖</div>
+          <div class="policy-title">Dispute Resolution</div>
+          <div class="policy-body">
+            If you have a concern about a charge, please contact us at <a href="mailto:support@hoursand.co">support@hoursand.co</a> before initiating a dispute with your bank or card issuer. We resolve billing issues directly and promptly.<br><br>
+            All purchases are processed securely through <strong>Stripe</strong>. Hours &amp; Co. does not store payment card information.
+          </div>
+        </div>
+
+        <div class="policy-card">
+          <div class="policy-icon">ℹ</div>
+          <div class="policy-title">Service &amp; Restrictions</div>
+          <div class="policy-body">
+            <strong>Digital services only.</strong> Hours &amp; Co. sells digital access to software and data. No physical goods are sold or shipped.<br><br>
+            <strong>WatchUm</strong> is currently limited to Austin, Texas crime-incident data sourced from Austin Police Department public records. Coverage is subject to data availability.<br><br>
+            <strong>DealDossier</strong> surfaces deals from third-party retailers. We do not guarantee availability, pricing, or terms of any specific deal.
+          </div>
+        </div>
+
+        <div class="policy-card">
+          <div class="policy-icon">◎</div>
+          <div class="policy-title">Promotions &amp; Free Tiers</div>
+          <div class="policy-body">
+            <strong>DealDossier Free Tier</strong> is available at no cost with no credit card required. It includes curated deal emails with up to 3 watchlist picks.<br><br>
+            Promotional offers or discount codes may be made available from time to time. Specific terms (duration, eligibility, redemption limits) will be communicated at the time of each promotion. Promotions cannot be combined unless explicitly stated.
+          </div>
+        </div>
+
+        <div class="policy-card">
+          <div class="policy-icon">✉</div>
+          <div class="policy-title">Customer Support</div>
+          <div class="policy-body">
+            For billing questions, refund requests, cancellations, or general support, contact us at:<br><br>
+            <strong>Email:</strong> <a href="mailto:support@hoursand.co">support@hoursand.co</a><br><br>
+            We aim to respond within <strong>1–2 business days</strong>. For billing matters, please include your account email and a brief description of the issue.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title">CONTACT US</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Hours &amp; Co.</h3>
+        <p>We're a small, focused team. Reach out for support, partnership inquiries, or general questions about our products.</p>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="contact-row-label">Email</span>
+            <a href="mailto:support@hoursand.co">support@hoursand.co</a>
+          </div>
+          <div class="contact-row">
+            <span class="contact-row-label">Web</span>
+            <a href="https://hoursand.co">hoursand.co</a>
+          </div>
+          <div class="contact-row">
+            <span class="contact-row-label">Social</span>
+            <a href="https://www.facebook.com/profile.php?id=61589812217210" target="_blank" rel="noopener">Facebook — Hours &amp; Co.</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-apps">
+        <h3>Our Apps</h3>
+        <div class="app-link-row">
+          <a href="https://dealdossier.io" target="_blank" rel="noopener" class="app-link-item">
+            <div>
+              <div class="app-link-name">DealDossier</div>
+              <div class="app-link-sub">Personalized retail deal alerts</div>
+            </div>
+            <span class="app-link-url">dealdossier.io →</span>
+          </a>
+          <a href="https://watchum.io" target="_blank" rel="noopener" class="app-link-item">
+            <div>
+              <div class="app-link-name">WatchUm</div>
+              <div class="app-link-sub">Austin crime-incident reports</div>
+            </div>
+            <span class="app-link-url">watchum.io →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">HOURS &amp; CO.</div>
+        <div class="footer-tagline">A revenue studio. Building focused products.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#apps">Apps</a>
+        <a href="#policies">Refund Policy</a>
+        <a href="#policies">Cancellation Policy</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:support@hoursand.co">support@hoursand.co</a>
+        <a href="https://www.facebook.com/profile.php?id=61589812217210" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Hours &amp; Co. All rights reserved.</span>
+      <span>DealDossier and WatchUm are products of Hours &amp; Co.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
